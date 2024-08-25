@@ -75,6 +75,69 @@ window.__h82AlnkH6D91__("WyJwdWItOTA4MzU2ODA0Njg4NzkxOSIsW251bGwsbnVsbCxudWxsLCJ
  https://e-darkart.github.io
  
  -->
+    <button type="button" onclick="googlefc.callbackQueue.push({'CONSENT_DATA_READY': () => googlefc.showRevocationMessage()});">
+  Click here to revoke
+</button>
+    <script>
+  // Make sure that the properties exist on the window.
+  window.googlefc = window.googlefc || {};
+  window.googlefc.ccpa = window.googlefc.ccpa || {}
+  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+
+  // Queue the callback on the callbackQueue.
+  googlefc.callbackQueue.push({
+    'AD_BLOCK_DATA_READY':
+    () => {
+      switch (googlefc.getAdBlockerStatus()) {
+          case googlefc.AdBlockerStatusEnum.EXTENSION_LEVEL_AD_BLOCKER:
+          case googlefc.AdBlockerStatusEnum.NETWORK_LEVEL_AD_BLOCKER:
+            // Insert handling for cases where the user is blocking ads.
+            break;
+          case googlefc.AdBlockerStatusEnum.NO_AD_BLOCKER:
+            // Insert handling for cases where the user is not blocking ads.
+            break;
+          case googlefc.AdBlockerStatusEnum.UNKNOWN:
+            // Insert handling for unknown cases.
+            break;
+      }
+    }
+  });
+</script>
+    <script>
+  // Make sure that the properties exist on the window.
+  window.googlefc = window.googlefc || {};
+  window.googlefc.ccpa = window.googlefc.ccpa || {}
+  window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+
+  // Queue the callback on the callbackQueue.
+  googlefc.callbackQueue.push({
+    'AD_BLOCK_DATA_READY':
+    () => {
+      switch (googlefc.getAllowAdsStatus()) {
+        case googlefc.AllowAdsStatusEnum.ADS_NOT_ALLOWED:
+          // Insert handling for cases where the user has not allowed ads.
+          // The user may have never been an ad blocker.
+          break;
+        case googlefc.AllowAdsStatusEnum.ADS_ALLOWED:
+          // Insert handling for cases where the user saw the ad blocking
+          // message and allowed ads on the site.
+          break;
+        case googlefc.AllowAdsStatusEnum.UNKNOWN:
+          // Insert handling for unknown cases.
+          break;
+      }
+    }
+  });
+</script>
+    <script>
+// This callback will be called with the user CPRA decision.
+const ccpaCompletionCallback = (userOptedOut) => {
+  // Insert handling for user opt-out status here.
+}
+// Invoke the CPRA confirmation dialog when the user clicks the link.
+document.getElementById("your-custom-ccpa-do-not-sell-link").addEventListener(
+  "click", () => googlefc.ccpa.openConfirmationDialog(ccpaCompletionCallback));
+</script>
 
 </head>
 <body>
